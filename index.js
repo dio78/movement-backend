@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const cors = require('cors');
-const parse = require('pg-connection-string').parse;
+// const parse = require('pg-connection-string').parse;
 const http = require('http');
 const bodyParser = require('body-parser');
 
