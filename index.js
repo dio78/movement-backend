@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const { requireSignin, requireAuth } = require('./services/authentication')
 
 const defaultRouter = require('./routes/routes');
-const { signin, signup } = require('./routes/sign-in')
+const { signin, signup, sendEmail } = require('./routes/sign-in')
 
 const app = express();
 
@@ -41,7 +41,7 @@ app.post('/auth/sign-in', requireSignin, signin);
 app.post('/auth/sign-up', signup);
 app.use('/api', requireAuth, defaultRouter)
 app.get('/tables', queries.setUpTables)
-app.get('/boom', queries.getAllMovements)
+app.get('/boom', sendEmail)
 
 
 const port = process.env.PORT || 8000;
