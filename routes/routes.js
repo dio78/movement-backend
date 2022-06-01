@@ -13,6 +13,4 @@ router.route('/tables').get(queries.setUpTables);
 
 router.route('/doit').get((req, res) => res.send('This'));
 
-
-
 module.exports = router;

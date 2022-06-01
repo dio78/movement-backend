@@ -1,6 +1,7 @@
 const { pool } = require('../queries/queries')
 const jwt = require('jwt-simple')
 const keys = require('../config/keys');
+const mailjet = require ('node-mailjet').connect('****************************1234', '****************************abcd')
 
 function tokenForUser(user) {
   return jwt.encode({ 
@@ -27,6 +28,39 @@ exports.currentUser = function(req, res) {
   };
 
   res.send(user);
+}
+
+const sendEmail = () => {
+  const request = mailjet
+  .post("send", {'version': 'v3.1'})
+  .request({
+    "Messages":[
+      {
+        "From": {
+          "Email": "cdebon97@gmail.com",
+          "Name": "Dio"
+        },
+        "To": [
+          {
+            "Email": "cdebon97@gmail.com",
+            "Name": "Dio"
+          }
+        ],
+        "Subject": "Greetings from Mailjet.",
+        "TextPart": "My first Mailjet email",
+        "HTMLPart": "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+        "CustomID": "AppGettingStartedTest"
+      }
+    ]
+  })
+
+  request
+    .then((result) => {
+      console.log(result.body)
+    })
+    .catch((err) => {
+      console.log(err.statusCode)
+    })
 }
 
 exports.signup = function(req, res, next) {
@@ -74,7 +108,7 @@ exports.signup = function(req, res, next) {
       if(err) {
         return next(err);
       }
-
+      sendEmail();
       return res.send(results.rows);
     });
 
