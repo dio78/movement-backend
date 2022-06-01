@@ -86,7 +86,7 @@ exports.signup = function(req, res, next) {
 };
 
 exports.sendEmail = () => {
-  
+
   const request = mailjet
       .post("send", {'version': 'v3.1'})
       .request({
@@ -116,5 +116,7 @@ exports.sendEmail = () => {
         .catch((err) => {
           console.log(err.statusCode)
         })
+
+  return;
 
 }
