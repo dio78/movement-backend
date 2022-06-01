@@ -128,6 +128,7 @@ const getSavedMovements = (req, res, next) => {
   });
 };
 
+
 async function setUpTables(request, response) {
   
   const createUserTable = `
@@ -189,6 +190,5 @@ module.exports = {
   setUpTables,
   saveVidToLibrary,
   getSavedMovements,
-  getSingleMovement,
-  sendEmail
+  getSingleMovement
 }
