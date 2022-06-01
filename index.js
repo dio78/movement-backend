@@ -8,8 +8,6 @@ const cors = require('cors');
 const http = require('http');
 const bodyParser = require('body-parser');
 
-const { pool } = require('./queries/queries');
-
 const { requireSignin, requireAuth } = require('./services/authentication')
 
 const defaultRouter = require('./routes/routes');
@@ -31,6 +29,11 @@ app.use(express.urlencoded({limit: '50mb'}));
 
 const queries = require('./queries/queries')
 
+const { pool } = require('./queries/queries');
+
+pool.connect((err) => {
+  if (err) console.log(err);
+});
 
 // Routes
 app.get('/test', (req, res) => res.send('I work!'));

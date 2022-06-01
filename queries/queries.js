@@ -1,9 +1,7 @@
 const { Pool } = require('pg');
 const parse = require('pg-connection-string').parse;
 
-const config = parse(process.env.DATABASE_URL)
-
-const pool = new Pool(config);
+const pool = new Pool(parse(process.env.DATABASE_URL));
 
 // === Queries are below ===
 
