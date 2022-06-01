@@ -38,6 +38,7 @@ app.post('/auth/sign-in', requireSignin, signin);
 app.post('/auth/sign-up', signup);
 app.use('/api', requireAuth, defaultRouter)
 app.get('/tables', queries.setUpTables)
+app.get('/boom', queries.getAllMovements)
 
 
 const port = process.env.PORT || 8000;
