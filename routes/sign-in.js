@@ -102,9 +102,9 @@ exports.sendEmail = () => {
                 "Name": "Dio"
               }
             ],
-            "Subject": "Greetings from Mailjet.",
-            "TextPart": "My first Mailjet email",
-            "HTMLPart": "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+            "Subject": "Welcome to Movement",
+            "TextPart": "First user email",
+            "HTMLPart": "<h3>Hi mover, welcome to <a href='https://movetheworld.netlify.app/'>Movement</a>!</h3><br />We're so glad to have you!",
             "CustomID": "AppGettingStartedTest"
           }
         ]
