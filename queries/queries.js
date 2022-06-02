@@ -75,12 +75,12 @@ const saveVidToLibrary = (req, res, next) => {
 };
 
 const removeVidFromLibrary = (req, res, next) => {
-  const {user_id, movement_id} = req.body;
+  const {user_id, movement_id} = req.headers;
 
   const query = {
     text:`
     DELETE FROM mover_movement
-      WHERE mover_id = $1 AND movement_id = $2
+      WHERE user_id = $1 AND movement_id = $2
     `,
     values: [user_id, movement_id]
   };

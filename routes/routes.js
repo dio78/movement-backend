@@ -7,6 +7,8 @@ router.route('/movements').get(queries.getAllMovements).post(queries.uploadMovem
 
 router.route('/library').get(queries.getSavedMovements).post(queries.saveVidToLibrary).delete(queries.removeVidFromLibrary);
 
+router.route('/library/:id').delete((req, res) => res.send('I work'))
+
 router.route('/learn/:id').get(queries.getSingleMovement);
 
 router.route('/tables').get(queries.setUpTables);
