@@ -74,6 +74,26 @@ const saveVidToLibrary = (req, res, next) => {
   })
 };
 
+const removeVidFromLibrary = (req, res, next) => {
+  const {user_id, movement_id} = req.body;
+
+  const query = {
+    text:`
+    DELETE FROM mover_movement
+      WHERE mover_id = $1 AND movement_id = $2
+    `,
+    values: [user_id, movement_id]
+  };
+
+  pool.query(query, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.send();
+  });
+}
+
 const getAllMovements = (req, res, next) => {
   const query = {
     text: `
@@ -190,5 +210,6 @@ module.exports = {
   setUpTables,
   saveVidToLibrary,
   getSavedMovements,
-  getSingleMovement
+  getSingleMovement,
+  removeVidFromLibrary
 }
