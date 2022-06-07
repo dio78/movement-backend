@@ -106,7 +106,10 @@ const getAllMovements = (req, res, next) => {
       movements.steps
     FROM
       movements
-    INNER JOIN movers ON movements.user_id = movers.user_id;
+    INNER JOIN movers ON movements.user_id = movers.user_id
+	  LEFT JOIN mover_movement ON mover_movement.movement_id = movements.movement_id
+	  WHERE mover_movement.movement_id IS NULL AND mover_movement.user_id = 1;
+	
     `
   };
 
