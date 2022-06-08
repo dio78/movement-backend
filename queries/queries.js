@@ -95,22 +95,28 @@ const removeVidFromLibrary = (req, res, next) => {
 }
 
 const getAllMovements = (req, res, next) => {
+  const { user_id } = req.user.rows[0];
+  
   const query = {
     text: `
     Select 
       movements.movement_id,
       movements.user_id,
-      movers.username,
+	    movers.username,
       movements.title,
       movements.thumbnail,
       movements.steps
     FROM
       movements
     INNER JOIN movers ON movements.user_id = movers.user_id
-	  LEFT JOIN mover_movement ON mover_movement.movement_id = movements.movement_id
-	  WHERE mover_movement.movement_id IS NULL AND mover_movement.user_id = 1;
+  	WHERE NOT EXISTS (
+		SELECT 1
+		FROM mover_movement
+		WHERE movements.movement_id = mover_movement.movement_id AND mover_movement.user_id = $1
+	);
 	
-    `
+    `,
+    values: [user_id]
   };
 
   pool.query(query, (error, results) => {
