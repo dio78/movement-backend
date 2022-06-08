@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: '*',
-    methods: ["GET", "POST"],
+    methods: '*',
   })
 );
 // app.use(bodyParser.json());
