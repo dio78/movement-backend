@@ -6,14 +6,14 @@ const pool = new Pool(parse(process.env.DATABASE_URL));
 // === Queries are below ===
 
 const uploadMovement = (req, res, next) => {
-  const {user_id, title, thumbnail, keyframes, steps} = req.body;
+  const {user_id, title, thumbnail, keyframes, steps, number_of_steps} = req.body;
 
   const query = {
     text: `
-    INSERT INTO movements (user_id, title, thumbnail, keyframes, steps)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *;
+    INSERT INTO movements (user_id, title, thumbnail, keyframes, steps, number_of_steps)
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
     `,
-    values: [user_id, title, thumbnail, keyframes, steps]
+    values: [user_id, title, thumbnail, keyframes, steps, number_of_steps]
   };
 
   pool.query(query, (error, results) => {
@@ -105,7 +105,7 @@ const getAllMovements = (req, res, next) => {
 	    movers.username,
       movements.title,
       movements.thumbnail,
-      movements.steps
+      movements.number_of_steps
     FROM
       movements
     INNER JOIN movers ON movements.user_id = movers.user_id
@@ -138,7 +138,7 @@ const getSavedMovements = (req, res, next) => {
       movements.title,
       movements.thumbnail,
       movers.username,
-      movements.steps
+      movements.number_of_steps
     FROM mover_movement
       Inner Join movements
         ON movements.movement_id = mover_movement.movement_id
