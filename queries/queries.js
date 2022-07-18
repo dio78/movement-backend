@@ -6,14 +6,14 @@ const pool = new Pool(parse(process.env.DATABASE_URL));
 // === Queries are below ===
 
 const uploadMovement = (req, res, next) => {
-  const {user_id, title, thumbnail, keyframes, steps, number_of_steps} = req.body;
+  const {user_id, title, thumbnail, keyframes, steps, number_of_steps, video_height, video_width} = req.body;
 
   const query = {
     text: `
-    INSERT INTO movements (user_id, title, thumbnail, keyframes, steps, number_of_steps)
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+    INSERT INTO movements (user_id, title, thumbnail, keyframes, steps, number_of_steps, video_height, video_width)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `,
-    values: [user_id, title, thumbnail, keyframes, steps, number_of_steps]
+    values: [user_id, title, thumbnail, keyframes, steps, number_of_steps, video_height, video_width]
   };
 
   pool.query(query, (error, results) => {
