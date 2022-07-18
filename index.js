@@ -19,6 +19,8 @@ app.use(
   cors({
     origin: '*',
     methods: '*',
+    allowedHeaders: '*',
+    optionsSuccessStatus: 200
   })
 );
 // app.use(bodyParser.json());
