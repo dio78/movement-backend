@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://movetheworld.netlify.app',
+    origin: '*',
     methods: '*'
   })
 );
