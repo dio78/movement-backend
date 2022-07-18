@@ -18,9 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: '*',
-    methods: '*',
-    allowedHeaders: '*',
-    optionsSuccessStatus: 200
+    methods: '*'
   })
 );
 // app.use(bodyParser.json());
